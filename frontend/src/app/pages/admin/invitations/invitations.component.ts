@@ -12,7 +12,7 @@ import { SpinnerService } from '../../../services/spinner.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
 import { humanDuration } from '@shared/utils'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-invitations',
@@ -59,6 +59,7 @@ export class InvitationsComponent {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   async ngAfterViewInit() {
     // Assign the data to the data source for the table to render
@@ -74,10 +75,11 @@ export class InvitationsComponent {
 
   delete(id: string) {
     const invite = this.dataSource.data.find(i => i.id === id)
+    const name = invite?.username ?? invite?.email ?? id
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to remove invitation for '${invite?.username ?? invite?.email ?? id}'?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.invitations.messages.confirm-delete', { name })),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -92,7 +94,7 @@ export class InvitationsComponent {
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
         this.snackbarService.message('Invitation was deleted.')
       } catch (_e) {
-        this.snackbarService.error('Could not delete invitation.')
+        this.snackbarService.error(String(this.translateService.instant('admin.invitations.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

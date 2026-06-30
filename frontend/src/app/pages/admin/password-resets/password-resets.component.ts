@@ -96,7 +96,7 @@ export class PasswordResetsComponent {
       this.dataSource.data = this.dataSource.sortData(data, this.sort())
       this.snackbarService.message('Password reset link was created.')
     } catch (_e) {
-      this.snackbarService.error('Could not create password reset link.')
+      this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-create')))
     } finally {
       this.spinnerService.hide()
     }
@@ -105,8 +105,8 @@ export class PasswordResetsComponent {
   delete(id: string) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete this password reset link?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.password-resets.messages.confirm-delete')),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -121,7 +121,7 @@ export class PasswordResetsComponent {
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
         this.snackbarService.message('Password reset link was deleted.')
       } catch (_e) {
-        this.snackbarService.error('Could not delete password reset link.')
+        this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }
@@ -153,7 +153,7 @@ export class PasswordResetsComponent {
       await this.adminService.sendPasswordReset(reset.id)
       this.snackbarService.message(`Password reset link sent to ${reset.email}.`)
     } catch (_e) {
-      this.snackbarService.error('Could not send password reset link.')
+      this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-send')))
     } finally {
       this.spinnerService.hide()
     }

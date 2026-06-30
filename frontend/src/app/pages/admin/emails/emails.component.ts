@@ -17,7 +17,7 @@ import { UserService } from '../../../services/user.service'
 import type { CurrentUserDetails } from '@shared/api-response/UserDetails'
 import type { ConfigResponse } from '@shared/api-response/ConfigResponse'
 import { ConfigService } from '../../../services/config.service'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-emails',
@@ -61,6 +61,7 @@ export class EmailsComponent {
   private dialog = inject(MatDialog)
   private userService = inject(UserService)
   private configService = inject(ConfigService)
+  private translateService = inject(TranslateService)
 
   me?: CurrentUserDetails
   public config?: ConfigResponse
@@ -97,7 +98,7 @@ export class EmailsComponent {
       this.dataSource.data = data.emails
       this.paginator().length = data.count
     } catch (_e) {
-      this.snackbarService.error('Could not get Sent Mail.')
+      this.snackbarService.error(String(this.translateService.instant('admin.emails.messages.could-not-load')))
     } finally {
       this.spinnerService.hide()
     }
@@ -119,10 +120,10 @@ export class EmailsComponent {
           this.spinnerService.show()
           await this.adminService.sendTestEmail(data)
           await this.setData()
-          this.snackbarService.message('Sent Test Email.')
+          this.snackbarService.message(String(this.translateService.instant('admin.emails.messages.sent-test')))
         } catch (e) {
           console.error(e)
-          this.snackbarService.error('Could not send Test Email.')
+          this.snackbarService.error(String(this.translateService.instant('admin.emails.messages.could-not-send-test')))
         } finally {
           this.spinnerService.hide()
         }

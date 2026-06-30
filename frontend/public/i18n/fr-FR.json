@@ -143,30 +143,13 @@
     }
   },
   "verify-email": {
-    "verify": {
-      "title": {
-        "verifying-email": "Vérification de l'e-mail...",
-        "email-could-not-be-verified": "L'e-mail n'a pas pu être vérifié",
-        "sending-new-verification": "Envoi d'une nouvelle vérification...",
-        "email-verification-could-not-be-sent": "La vérification de l'e-mail n'a pas pu être envoyée"
-      },
-      "actions": {
-        "send-again": "Renvoyer"
-      }
-    },
-    "verify-sent": {
-      "title": {
-        "verification-email-sent": "E-mail de vérification envoyé",
-        "email-verification-required": "Vérification de l'e-mail requise"
-      },
-      "actions": {
-        "logout": "Déconnexion",
-        "send-again": "Renvoyer",
-        "send-verification": "Envoyer la vérification"
-      },
-      "email": {
-        "label": "E-mail"
-      }
+    "messages": {
+      "could-not-load-user": "Impossible de charger les détails de l'utilisateur.",
+      "verification-sent": "E-mail de vérification envoyé.",
+      "email-updated": "E-mail mis à jour.",
+      "could-not-update-email": "Impossible de mettre à jour l'e-mail.",
+      "resent": "E-mail de vérification renvoyé.",
+      "could-not-create-session": "Impossible de créer une session."
     }
   },
   "settings": {
@@ -192,6 +175,13 @@
               "label": "Mettre à jour l'e-mail"
             }
           }
+        },
+        "messages": {
+          "profile-updated": "Profil mis à jour.",
+          "could-not-update-profile": "Impossible de mettre à jour le profil.",
+          "verification-email-sent": "E-mail de vérification envoyé.",
+          "email-updated": "E-mail mis à jour.",
+          "could-not-update-email": "Impossible de mettre à jour l'e-mail."
         }
       },
       "security": {
@@ -202,6 +192,10 @@
           },
           "change": {
             "label": "Changer le mot de passe"
+          },
+          "messages": {
+            "updated": "Mot de passe mis à jour.",
+            "could-not-update": "Impossible de mettre à jour le mot de passe."
           }
         },
         "passkeys": {
@@ -225,6 +219,21 @@
             "name-id": "Nom/ID",
             "last-used": "Dernière utilisation",
             "created-at": "Date de création"
+          },
+          "messages": {
+            "registered": "Clé d'authentification enregistrée avec succès.",
+            "already-registered": "Clé d'authentification déjà enregistrée.",
+            "could-not-register": "Impossible d'enregistrer la clé d'authentification.",
+            "updated": "Clé d'authentification mise à jour.",
+            "could-not-update": "Impossible de mettre à jour la clé d'authentification.",
+            "deleted": "Clé d'authentification supprimée.",
+            "could-not-delete": "La clé d'authentification n'a pas pu être supprimée.",
+            "removed-all": "Toutes les clés d'authentification ont été supprimées.",
+            "could-not-remove-all": "Impossible de supprimer toutes les clés d'authentification.",
+            "added": "Clé d'authentification ajoutée.",
+            "created-no-name": "Clé d'authentification créée, mais impossible de définir le nom.",
+            "confirm-delete": "Êtes-vous sûr de vouloir supprimer cette clé d'authentification ?",
+            "confirm-delete-all": "Êtes-vous sûr de vouloir supprimer toutes les clés d'authentification de votre compte ? Les services précédemment activés comme FaceID, Windows Hello, TouchID, etc. cesseront de fonctionner."
           }
         },
         "mfa": {
@@ -242,6 +251,13 @@
           },
           "enable": {
             "label": "Activer l'AMF"
+          },
+          "messages": {
+            "authenticator-added": "Authentificateur ajouté avec succès.",
+            "enabled": "Authentification multifactorielle activée.",
+            "confirm-disable": "Êtes-vous sûr de vouloir désactiver l'authentification multifactorielle et supprimer les authentificateurs de votre compte ?",
+            "disabled": "Authentification multifactorielle désactivée et authentificateurs supprimés.",
+            "could-not-disable": "Impossible de désactiver l'authentification multifactorielle ou de supprimer les authentificateurs."
           }
         }
       },
@@ -269,6 +285,14 @@
         },
         "deleteAccount": {
           "label": "Supprimer le compte"
+        },
+        "messages": {
+          "confirm-remove-password": "Êtes-vous sûr de vouloir supprimer le mot de passe de votre compte ? Vous devrez vous connecter avec une clé d'authentification, FaceID, Windows Hello, etc. jusqu'à ce que vous définissiez un nouveau mot de passe.",
+          "password-removed": "Mot de passe supprimé.",
+          "could-not-remove-password": "Impossible de supprimer le mot de passe.",
+          "confirm-delete-account": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+          "account-deleted": "Compte supprimé.",
+          "could-not-delete-account": "Impossible de supprimer le compte."
         }
       }
     }
@@ -316,6 +340,12 @@
         "first-page": "Première page",
         "last-page": "Dernière page",
         "of": "sur"
+      },
+      "dialogs": {
+        "delete": "Supprimer",
+        "remove": "Retirer",
+        "danger": "DANGER",
+        "approval": "Approbation"
       }
     },
     "users": {
@@ -326,6 +356,13 @@
       },
       "labels": {
         "search": "Rechercher"
+      },
+      "messages": {
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer l'utilisateur « {{name}} » ?",
+        "confirm-approve": "Êtes-vous sûr de vouloir approuver {{count}} utilisateur(s) ?",
+        "confirm-delete-bulk": "Êtes-vous sûr de vouloir supprimer {{count}} utilisateur(s) ?",
+        "could-not-delete": "Impossible de supprimer le(s) utilisateur(s).",
+        "could-not-approve": "Impossible d'approuver le(s) utilisateur(s)."
       }
     },
     "user": {
@@ -351,6 +388,11 @@
       "empty-state": "Aucune application OIDC.",
       "actions": {
         "create": "Créer une application OIDC"
+      },
+      "messages": {
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer l'application « {{name}} » ?",
+        "deleted": "L'application {{name}} a été supprimée.",
+        "could-not-delete": "Impossible de supprimer l'application."
       }
     },
     "client": {
@@ -387,13 +429,23 @@
       },
       "messages": {
         "client-id-copied": "ID client copié dans le presse-papiers.",
-        "secret-copied": "Secret copié dans le presse-papiers."
+        "secret-copied": "Secret copié dans le presse-papiers.",
+        "error-loading": "Erreur lors du chargement des détails de l'application OIDC.",
+        "saved": "Application {{action}}.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer cette application ?",
+        "deleted": "Application supprimée.",
+        "could-not-delete": "Impossible de supprimer l'application."
       }
     },
     "domains": {
       "empty-state": "Aucun domaine.",
       "actions": {
         "create": "Créer un domaine ProxyAuth"
+      },
+      "messages": {
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer le domaine « {{name}} » ?",
+        "deleted": "Le domaine a été supprimé.",
+        "could-not-delete": "Impossible de supprimer le domaine."
       }
     },
     "domain": {
@@ -417,6 +469,14 @@
         "0": "Le domaine ne doit pas inclure le protocole, peut inclure un chemin et un port, et prend en charge les caractères génériques (*) à n'importe quelle position.",
         "1": "<b>exemple.domaine.com/api/alive</b> vérifiera uniquement l'accès à un seul point de terminaison.",
         "2": "<b>exemple.domaine.com/api/*</b> vérifiera l'accès pour tous les points de terminaison sous /api."
+      },
+      "messages": {
+        "error-loading": "Erreur lors du chargement du domaine ProxyAuth.",
+        "saved": "Domaine {{action}}.",
+        "could-not-save": "Impossible de {{action}} le domaine.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer ce domaine ?",
+        "deleted": "Domaine supprimé.",
+        "could-not-delete": "Impossible de supprimer le domaine."
       }
     },
     "password-resets": {
@@ -429,7 +489,11 @@
         "delete": "Supprimer"
       },
       "messages": {
-        "link-copied": "Lien de réinitialisation copié dans le presse-papiers."
+        "link-copied": "Lien de réinitialisation copié dans le presse-papiers.",
+        "could-not-create": "Impossible de créer le lien de réinitialisation.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer ce lien de réinitialisation ?",
+        "could-not-delete": "Impossible de supprimer le lien de réinitialisation.",
+        "could-not-send": "Impossible d'envoyer le lien de réinitialisation."
       }
     },
     "emails": {
@@ -440,12 +504,21 @@
       "tooltips": {
         "preview": "Aperçu",
         "view-user": "Voir l'utilisateur"
+      },
+      "messages": {
+        "could-not-load": "Impossible de récupérer les e-mails envoyés.",
+        "sent-test": "E-mail de test envoyé.",
+        "could-not-send-test": "Impossible d'envoyer l'e-mail de test."
       }
     },
     "groups": {
       "empty-state": "Aucun groupe.",
       "actions": {
         "create": "Créer un groupe"
+      },
+      "messages": {
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer le groupe « {{name}} » ?",
+        "could-not-delete": "Impossible de supprimer le groupe."
       }
     },
     "group": {
@@ -464,6 +537,10 @@
       "empty-state": "Aucune invitation.",
       "actions": {
         "create": "Créer une invitation"
+      },
+      "messages": {
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer l'invitation pour « {{name}} » ?",
+        "could-not-delete": "Impossible de supprimer l'invitation."
       }
     },
     "invitation": {
@@ -612,6 +689,28 @@
       "save": {
         "label": "Enregistrer"
       }
+    }
+  },
+  "reset-password-page": {
+    "messages": {
+      "invalid-link": "Lien de réinitialisation invalide.",
+      "complete": "Réinitialisation du mot de passe terminée.",
+      "passkey-created": "Clé d'authentification créée.",
+      "already-registered": "Clé d'authentification déjà enregistrée.",
+      "could-not-register": "Impossible d'enregistrer la clé d'authentification."
+    }
+  },
+  "consent-page": {
+    "messages": {
+      "not-valid": "Les détails de confirmation ne sont pas valides."
+    }
+  },
+  "totp-register": {
+    "messages": {
+      "could-not-get-info": "Impossible d'obtenir les informations de l'authentificateur.",
+      "invalid-code": "Code saisi invalide.",
+      "could-not-enable-mfa": "Impossible d'activer l'authentification multifactorielle.",
+      "could-not-add": "Impossible d'ajouter l'authentificateur."
     }
   }
 }

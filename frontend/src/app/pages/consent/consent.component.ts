@@ -7,7 +7,7 @@ import { MaterialModule } from '../../material-module'
 import type { ConsentDetails } from '@shared/api-response/ConsentDetails'
 import { SpinnerService } from '../../services/spinner.service'
 import { getBaseHrefPath } from '../../services/config.service'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-consent',
@@ -28,6 +28,7 @@ export class ConsentComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
+  private translateService = inject(TranslateService)
 
   ngOnInit() {
     this.route.paramMap.subscribe(async (paramMap) => {
@@ -42,7 +43,7 @@ export class ConsentComponent implements OnInit {
         this.redirectHost = url?.host
       } catch (e) {
         console.error(e)
-        this.snackbarService.error('Confirmation details not valid.')
+        this.snackbarService.error(String(this.translateService.instant('consent-page.messages.not-valid')))
       } finally {
         this.spinnerService.hide()
       }

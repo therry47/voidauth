@@ -28,9 +28,9 @@ export class VerifyComponent implements OnInit {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private configService = inject(ConfigService)
-  private translate = inject(TranslateService)
+  private translateService = inject(TranslateService)
 
-  title = this.translate.stream('verify-email.verify.title.verifying-email')
+  title = this.translateService.stream('verify-email.verify.title.verifying-email')
   userid?: string
   config?: ConfigResponse
 
@@ -38,7 +38,7 @@ export class VerifyComponent implements OnInit {
     const params = this.activatedRoute.snapshot.paramMap
 
     try {
-      this.title = this.translate.stream('verify-email.verify.title.verifying-email')
+      this.title = this.translateService.stream('verify-email.verify.title.verifying-email')
 
       this.spinnerService.show()
 
@@ -53,7 +53,7 @@ export class VerifyComponent implements OnInit {
           // attempted to create interaction and failed
           console.error('Interaction cookie session not set even after creating one.')
           console.error(e)
-          this.snackbarService.error('Could not create session.')
+          this.snackbarService.error(String(this.translateService.instant('verify-email.messages.could-not-create-session')))
         }
       }
 
@@ -100,14 +100,14 @@ export class VerifyComponent implements OnInit {
 
       error ||= 'Something went wrong.'
       this.snackbarService.error(error)
-      this.title = this.translate.stream('verify-email.verify.title.email-could-not-be-verified')
+      this.title = this.translateService.stream('verify-email.verify.title.email-could-not-be-verified')
     } finally {
       this.spinnerService.hide()
     }
   }
 
   public async sendVerification() {
-    this.title = this.translate.stream('verify-email.verify.title.sending-new-verification')
+    this.title = this.translateService.stream('verify-email.verify.title.sending-new-verification')
     try {
       this.spinnerService.show()
       if (!this.userid) {
@@ -125,7 +125,7 @@ export class VerifyComponent implements OnInit {
       }
 
       error ||= 'Something went wrong.'
-      this.title = this.translate.stream('verify-email.verify.title.email-verification-could-not-be-sent')
+      this.title = this.translateService.stream('verify-email.verify.title.email-verification-could-not-be-sent')
       this.snackbarService.error(error)
     } finally {
       this.spinnerService.hide()

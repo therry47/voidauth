@@ -157,7 +157,7 @@ export class UpsertClientComponent implements OnInit {
         await this.getCurrentClientData()
       } catch (e) {
         console.error(e)
-        this.snackbarService.error('Error loading OIDC App Details.')
+        this.snackbarService.error(String(this.translateService.instant('admin.client.messages.error-loading')))
         this.disable()
       } finally {
         this.spinnerService.hide()
@@ -262,7 +262,8 @@ export class UpsertClientComponent implements OnInit {
         await this.adminService.addClient(submitValues)
       }
 
-      this.snackbarService.message(`Client ${this.client_id ? 'updated' : 'created'}.`)
+      const msg = String(this.translateService.instant('admin.client.messages.saved', { action: this.client_id ? 'updated' : 'created' }))
+      this.snackbarService.message(msg)
       this.client_id = submitValues.client_id
       if (!this.client_id) {
         throw new Error()
@@ -291,8 +292,8 @@ export class UpsertClientComponent implements OnInit {
   deleteClient() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete this app?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.client.messages.confirm-delete')),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -308,10 +309,10 @@ export class UpsertClientComponent implements OnInit {
           await this.adminService.deleteClient(this.client_id)
         }
 
-        this.snackbarService.message('App deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.client.messages.deleted')))
         await this.router.navigate(['/admin/clients'])
       } catch (_e) {
-        this.snackbarService.error('Could not delete app.')
+        this.snackbarService.error(String(this.translateService.instant('admin.client.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

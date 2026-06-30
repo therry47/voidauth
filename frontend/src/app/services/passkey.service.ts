@@ -14,7 +14,7 @@ import { SnackbarService } from './snackbar.service'
 import { SpinnerService } from './spinner.service'
 import { MaterialModule } from '../material-module'
 import type { CurrentUserDetails } from '@shared/api-response/UserDetails'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { PasskeyNameDialog } from '../dialogs/passkey-name/passkey-name.component'
 import type { PasskeyRegisterResponse } from '@shared/api-response/PasskeyRegisterResponse'
 
@@ -26,6 +26,7 @@ export class PasskeyService {
   private dialog = inject(MatDialog)
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
+  private translateService = inject(TranslateService)
 
   /**
    * Checks if passkey registration or usage has ever been flagged in localStorage.
@@ -145,9 +146,11 @@ export class PasskeyService {
         if (displayName) {
           this.spinnerService.show()
           this.updatePasskey(passkeyId, displayName).then(() => {
-            this.snackbarService.message('Passkey added.')
+            this.snackbarService.message(String(this.translateService.instant('settings.sections.security.passkeys.messages.added')))
           }).catch(() => {
-            this.snackbarService.error('Passkey created, but could not set name.')
+            this.snackbarService.error(
+              String(this.translateService.instant('settings.sections.security.passkeys.messages.created-no-name')),
+            )
           }).finally(() => {
             this.spinnerService.hide()
             resolve()
