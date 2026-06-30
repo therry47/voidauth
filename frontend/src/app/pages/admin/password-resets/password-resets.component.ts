@@ -40,12 +40,12 @@ export class PasswordResetsComponent {
   columns: TableColumn<PasswordResetUser>[] = [
     {
       columnDef: 'username',
-      header: 'Username',
+      header: 'admin.common.columns.username',
       cell: element => element.username,
     },
     {
       columnDef: 'expiresAt',
-      header: 'Expires In',
+      header: 'admin.common.columns.expires-in',
       cell: element => humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
     },
   ]

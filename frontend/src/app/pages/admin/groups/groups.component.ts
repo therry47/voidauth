@@ -33,7 +33,7 @@ export class GroupsComponent {
   columns: TableColumn<Group>[] = [
     {
       columnDef: 'name',
-      header: 'Group Name',
+      header: 'admin.common.columns.group-name',
       cell: element => element.name,
     },
   ]

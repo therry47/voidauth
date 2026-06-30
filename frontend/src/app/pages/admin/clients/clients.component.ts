@@ -40,17 +40,17 @@ export class ClientsComponent implements AfterViewInit {
   columns: TableColumn<ClientResponse>[] = [
     {
       columnDef: 'client_name',
-      header: 'Name',
+      header: 'admin.common.columns.name',
       cell: element => element.client_name ?? element.client_id,
     },
     {
       columnDef: 'redirect_uris',
-      header: 'Redirects',
+      header: 'admin.common.columns.redirects',
       cell: element => element.redirect_uris?.join('\n') ?? '-',
     },
     {
       columnDef: 'groups',
-      header: 'Allowed Groups',
+      header: 'admin.common.columns.allowed-groups',
       cell: element => element.groups.length ? element.groups.join('\n') : '*',
     },
   ]

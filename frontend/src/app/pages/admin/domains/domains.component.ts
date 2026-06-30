@@ -32,12 +32,12 @@ export class DomainsComponent {
   columns: TableColumn<ProxyAuthResponse>[] = [
     {
       columnDef: 'domain',
-      header: 'Domains',
+      header: 'admin.common.columns.domain',
       cell: element => element.domain,
     },
     {
       columnDef: 'groups',
-      header: 'Allowed Groups',
+      header: 'admin.common.columns.allowed-groups',
       cell: element => element.groups.length ? element.groups.join('\n') : '*',
     },
   ]

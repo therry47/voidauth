@@ -286,6 +286,31 @@
       },
       "messages": {
         "all-users-have-access": "No Groups, ALL users will have access."
+      },
+      "columns": {
+        "domain": "Domains",
+        "allowed-groups": "Allowed Groups",
+        "name": "Name",
+        "redirects": "Redirects",
+        "username": "Username",
+        "email": "Email",
+        "email-verified": "Email Verified",
+        "approved": "Approved",
+        "expires": "Expires",
+        "expires-in": "Expires In",
+        "access-expires": "Access Expires",
+        "group-name": "Group Name",
+        "sent": "Sent",
+        "to": "To",
+        "type": "Type"
+      },
+      "paginator": {
+        "items-per-page": "Items per page:",
+        "next-page": "Next page",
+        "previous-page": "Previous page",
+        "first-page": "First page",
+        "last-page": "Last page",
+        "of": "of"
       }
     },
     "users": {

@@ -286,6 +286,31 @@
       },
       "messages": {
         "all-users-have-access": "Aucun groupe, TOUS les utilisateurs auront accès."
+      },
+      "columns": {
+        "domain": "Domaines",
+        "allowed-groups": "Groupes autorisés",
+        "name": "Nom",
+        "redirects": "Redirections",
+        "username": "Nom d'utilisateur",
+        "email": "E-mail",
+        "email-verified": "E-mail vérifié",
+        "approved": "Approuvé",
+        "expires": "Expire",
+        "expires-in": "Expire dans",
+        "access-expires": "Accès expire",
+        "group-name": "Nom du groupe",
+        "sent": "Envoyé",
+        "to": "À",
+        "type": "Type"
+      },
+      "paginator": {
+        "items-per-page": "Éléments par page :",
+        "next-page": "Page suivante",
+        "previous-page": "Page précédente",
+        "first-page": "Première page",
+        "last-page": "Dernière page",
+        "of": "sur"
       }
     },
     "users": {
