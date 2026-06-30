@@ -40,7 +40,8 @@
   "passkey-dialog": {
     "title": "Activer {{platformName}} ?",
     "actions": {
-      "passkey": "Activer {{platformName}}"
+      "passkey": "Activer {{platformName}}",
+      "skip": "Passer"
     }
   },
   "mfa": {

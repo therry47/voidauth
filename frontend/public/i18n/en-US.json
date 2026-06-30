@@ -40,7 +40,8 @@
   "passkey-dialog": {
     "title": "Enable {{platformName}}?",
     "actions": {
-      "passkey": "Enable {{platformName}}"
+      "passkey": "Enable {{platformName}}",
+      "skip": "Skip"
     }
   },
   "mfa": {
