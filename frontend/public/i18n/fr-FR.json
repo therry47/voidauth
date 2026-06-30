@@ -50,7 +50,7 @@
       "register-passkey": "Enregistrer une clé d'authentification",
       "back": "Retour"
     },
-    "title": "Authentification multifactorielle requise"
+    "title": "Double authentification requise"
   },
   "registration": {
     "actions": {
@@ -238,27 +238,27 @@
           }
         },
         "mfa": {
-          "title": "Authentification multifactorielle",
+          "title": "Double authentification",
           "status": {
-            "enabled": "L'authentification multifactorielle est activée.",
-            "disabled": "L'authentification multifactorielle n'est pas activée."
+            "enabled": "La double authentification est activée.",
+            "disabled": "La double authentification n'est pas activée."
           },
           "authenticators": {
-            "has": "Vous avez au moins un authentificateur enregistré.",
-            "none": "Vous n'avez aucun authentificateur enregistré."
+            "has": "Vous avez au moins une méthode d'authentification enregistrée.",
+            "none": "Vous n'avez aucune méthode d'authentification enregistrée."
           },
           "add": {
-            "label": "Ajouter un authentificateur"
+            "label": "Ajouter une méthode d'authentification"
           },
           "enable": {
-            "label": "Activer l'AMF"
+            "label": "Activer la 2FA"
           },
           "messages": {
-            "authenticator-added": "Authentificateur ajouté avec succès.",
-            "enabled": "Authentification multifactorielle activée.",
-            "confirm-disable": "Êtes-vous sûr de vouloir désactiver l'authentification multifactorielle et supprimer les authentificateurs de votre compte ?",
-            "disabled": "Authentification multifactorielle désactivée et authentificateurs supprimés.",
-            "could-not-disable": "Impossible de désactiver l'authentification multifactorielle ou de supprimer les authentificateurs."
+            "authenticator-added": "Méthode d'authentification ajoutée avec succès.",
+            "enabled": "Double authentification activée.",
+            "confirm-disable": "Êtes-vous sûr de vouloir désactiver la double authentification et supprimer les méthodes d'authentification de votre compte ?",
+            "disabled": "Double authentification désactivée et méthodes d'authentification supprimées.",
+            "could-not-disable": "Impossible de désactiver la double authentification ou de supprimer les méthodes d'authentification."
           }
         }
       },
@@ -279,10 +279,10 @@
           }
         },
         "disableMfa": {
-          "label": "Désactiver l'AMF"
+          "label": "Désactiver la 2FA"
         },
         "removeAuthenticators": {
-          "label": "Supprimer les authentificateurs"
+          "label": "Supprimer les méthodes d'authentification"
         },
         "deleteAccount": {
           "label": "Supprimer le compte"
@@ -310,7 +310,7 @@
         "remove": "Retirer"
       },
       "labels": {
-        "mfa-required": "AMF requise",
+        "mfa-required": "2FA requise",
         "email-verified": "E-mail vérifié",
         "approved": "Approuvé"
       },
@@ -420,11 +420,11 @@
       },
       "checkboxes": {
         "skip-consent": "Passer le consentement",
-        "mfa-required": "AMF requise"
+        "mfa-required": "2FA requise"
       },
       "tooltips": {
         "skip-consent": "Passer la confirmation de l'utilisateur pour cette application.",
-        "mfa-required": "Les utilisateurs devront utiliser l'AMF pour accéder à cette application.",
+        "mfa-required": "Les utilisateurs devront utiliser la 2FA pour accéder à cette application.",
         "copy-client-id": "Copier l'ID client",
         "copy-secret": "Copier le secret"
       },
@@ -530,7 +530,7 @@
         "users": "Utilisateurs :"
       },
       "checkboxes": {
-        "mfa-required": "AMF requise",
+        "mfa-required": "2FA requise",
         "auto-assign": "Attribution automatique"
       }
     },
@@ -608,14 +608,14 @@
       }
     },
     "totp-input": {
-      "title": "Cela activera l'authentification multifactorielle sur votre compte.",
+      "title": "Cela activera la double authentification sur votre compte.",
       "labels": {
         "show-secret": "Afficher le secret"
       },
       "text": {
-        "qrcode-instruction": "Scannez le QR code ou saisissez le secret dans votre authentificateur",
+        "qrcode-instruction": "Scannez le QR code ou saisissez le secret dans votre application d'authentification",
         "then": "puis",
-        "enter-token": "Saisissez le jeton de l'authentificateur pour continuer"
+        "enter-token": "Saisissez le code de votre application d'authentification pour continuer"
       }
     },
     "theme-toggle": {
@@ -639,7 +639,7 @@
       }
     },
     "totp-register": {
-      "title": "Ajouter un authentificateur",
+      "title": "Ajouter une méthode d'authentification",
       "actions": {
         "cancel": {
           "label": "Annuler"
@@ -708,10 +708,10 @@
   },
   "totp-register": {
     "messages": {
-      "could-not-get-info": "Impossible d'obtenir les informations de l'authentificateur.",
+      "could-not-get-info": "Impossible d'obtenir les informations de la méthode d'authentification.",
       "invalid-code": "Code saisi invalide.",
-      "could-not-enable-mfa": "Impossible d'activer l'authentification multifactorielle.",
-      "could-not-add": "Impossible d'ajouter l'authentificateur."
+      "could-not-enable-mfa": "Impossible d'activer la double authentification.",
+      "could-not-add": "Impossible d'ajouter la méthode d'authentification."
     }
   }
 }
