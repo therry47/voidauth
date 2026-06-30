@@ -12,7 +12,11 @@
       "login": "Connexion",
       "sign-up": "Inscription"
     },
-    "title": "Connexion"
+    "title": "Connexion",
+    "messages": {
+      "could-not-login-passkey": "Impossible de se connecter avec la clé d'authentification.",
+      "could-not-create-session": "Impossible de créer la session."
+    }
   },
   "contact-us": {
     "actions": {

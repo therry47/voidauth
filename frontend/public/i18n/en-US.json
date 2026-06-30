@@ -12,7 +12,11 @@
       "login": "Login",
       "sign-up": "Sign Up"
     },
-    "title": "Login"
+    "title": "Login",
+    "messages": {
+      "could-not-login-passkey": "Could not login with passkey.",
+      "could-not-create-session": "Could not create session."
+    }
   },
   "contact-us": {
     "actions": {
