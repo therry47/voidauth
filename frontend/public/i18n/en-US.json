@@ -220,6 +220,11 @@
             "delete": {
               "tooltip": "Delete"
             }
+          },
+          "columns": {
+            "name-id": "Name/ID",
+            "last-used": "Last Used",
+            "created-at": "Created At"
           }
         },
         "mfa": {

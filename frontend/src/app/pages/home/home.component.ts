@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   passkeyColumns: TableColumn<PasskeyResponse>[] = [
     {
       columnDef: 'displayName',
-      header: 'Name/ID',
+      header: 'settings.sections.security.passkeys.columns.name-id',
       // User name if exists, otherwise use id convert from base64Url to base64, then convert to hex
       cell: element => element.displayName || atob(element.id.replace(/-/g, '+').replace(/_/g, '/'))
         .split('')
@@ -98,14 +98,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
     {
       columnDef: 'lastUsed',
-      header: 'Last Used',
+      header: 'settings.sections.security.passkeys.columns.last-used',
       cell: element => element.lastUsed
         ? new Date(element.lastUsed).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
         : '-',
     },
     {
       columnDef: 'createdAt',
-      header: 'Created At',
+      header: 'settings.sections.security.passkeys.columns.created-at',
       cell: element => element.createdAt
         ? new Date(element.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
         : '-',
