@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
 import { FormControl, ReactiveFormsModule } from '@angular/forms'
 import { debounceTime, distinctUntilChanged } from 'rxjs'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { humanDuration } from '@shared/utils'
 
 @Component({
@@ -40,29 +40,29 @@ export class UsersComponent {
   columns: TableColumn<UserWithAdminIndicator>[] = [
     {
       columnDef: 'username',
-      header: 'Username',
+      header: 'admin.common.columns.username',
       cell: element => element.username,
     },
     {
       columnDef: 'email',
-      header: 'Email',
+      header: 'admin.common.columns.email',
       cell: element => element.email ?? '',
     },
     {
       columnDef: 'emailVerified',
-      header: 'Email Verified',
+      header: 'admin.common.columns.email-verified',
       isIcon: true,
       cell: element => element.emailVerified ? 'done' : 'not_interested',
     },
     {
       columnDef: 'approved',
-      header: 'Approved',
+      header: 'admin.common.columns.approved',
       isIcon: true,
       cell: element => element.approved ? 'done' : 'not_interested',
     },
     {
       columnDef: 'expiresAt',
-      header: 'Expires',
+      header: 'admin.common.columns.expires',
       cell: element => element.expiresAt ? humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()) : '-',
     },
   ]
@@ -79,6 +79,7 @@ export class UsersComponent {
   private userService = inject(UserService)
   private spinnerService = inject(SpinnerService)
   readonly dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   async ngAfterViewInit() {
     // Assign the data to the data source for the table to render
@@ -129,8 +130,8 @@ export class UsersComponent {
     const user = this.dataSource.data.find(u => u.id === id)
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to remove user '${user?.username ?? id}'?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.users.messages.confirm-delete', { name: user?.username ?? id })),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -142,9 +143,9 @@ export class UsersComponent {
         this.spinnerService.show()
         await this.adminService.deleteUser(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('User was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.deleted')))
       } catch (_e) {
-        this.snackbarService.error('Could not delete user.')
+        this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }
@@ -162,8 +163,8 @@ export class UsersComponent {
   approveSelected() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to approve ${String(this.selected.length)} user(s)?`,
-        header: 'Approval',
+        message: String(this.translateService.instant('admin.users.messages.confirm-approve', { count: String(this.selected.length) })),
+        header: String(this.translateService.instant('admin.common.dialogs.approval')),
       },
     })
 
@@ -184,9 +185,9 @@ export class UsersComponent {
 
         this.toggleSelectEnabled()
 
-        this.snackbarService.message('User(s) were approved.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.approved')))
       } catch (_e) {
-        this.snackbarService.error('Could not approve user(s).')
+        this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-approve')))
       } finally {
         this.spinnerService.hide()
       }
@@ -196,8 +197,8 @@ export class UsersComponent {
   deleteSelected() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete ${String(this.selected.length)} user(s)?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.users.messages.confirm-delete-bulk', { count: String(this.selected.length) })),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -214,9 +215,9 @@ export class UsersComponent {
 
         this.toggleSelectEnabled()
 
-        this.snackbarService.message('User(s) were deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.deleted-bulk')))
       } catch (_e) {
-        this.snackbarService.error('Could not delete user(s).')
+        this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

@@ -14,7 +14,7 @@ import { SnackbarService } from './snackbar.service'
 import { SpinnerService } from './spinner.service'
 import { MaterialModule } from '../material-module'
 import type { CurrentUserDetails } from '@shared/api-response/UserDetails'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { PasskeyNameDialog } from '../dialogs/passkey-name/passkey-name.component'
 import type { PasskeyRegisterResponse } from '@shared/api-response/PasskeyRegisterResponse'
 
@@ -26,6 +26,7 @@ export class PasskeyService {
   private dialog = inject(MatDialog)
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
+  private translateService = inject(TranslateService)
 
   /**
    * Checks if passkey registration or usage has ever been flagged in localStorage.
@@ -145,15 +146,17 @@ export class PasskeyService {
         if (displayName) {
           this.spinnerService.show()
           this.updatePasskey(passkeyId, displayName).then(() => {
-            this.snackbarService.message('Passkey added.')
+            this.snackbarService.message(String(this.translateService.instant('settings.sections.security.passkeys.messages.added')))
           }).catch(() => {
-            this.snackbarService.error('Passkey created, but could not set name.')
+            this.snackbarService.error(
+              String(this.translateService.instant('settings.sections.security.passkeys.messages.created-no-name')),
+            )
           }).finally(() => {
             this.spinnerService.hide()
             resolve()
           })
         } else {
-          this.snackbarService.message('Passkey added.')
+          this.snackbarService.message(String(this.translateService.instant('services.passkey.messages.added')))
           resolve()
         }
       })
@@ -182,12 +185,12 @@ export class PasskeyService {
         this.spinnerService.show()
 
         this.register().then(() => {
-          this.snackbarService.message('Passkey added.')
+          this.snackbarService.message(String(this.translateService.instant('services.passkey.messages.added')))
         }).catch((error: unknown) => {
           if (error instanceof WebAuthnError && error.name === 'InvalidStateError') {
-            this.snackbarService.error('Passkey already exists.')
+            this.snackbarService.error(String(this.translateService.instant('services.passkey.messages.already-exists')))
           } else {
-            this.snackbarService.error('Could not create Passkey.')
+            this.snackbarService.error(String(this.translateService.instant('services.passkey.messages.could-not-create')))
           }
         }).finally(() => {
           this.spinnerService.hide()
@@ -216,7 +219,7 @@ export type PasskeySupport = {
       <mat-icon align="center" style="width: 100px; height: 100px; font-size: 100px;" fontSet="material-icons-round" matSuffix>{{ passkeySupport?.platformIcon ?? "key" }}</mat-icon>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button matButton mat-dialog-close>Skip</button>
+      <button matButton mat-dialog-close>{{ 'passkey-dialog.actions.skip' | translate }}</button>
       <button mat-flat-button type="button" [mat-dialog-close]="true" cdkFocusInitial>
         {{ 'passkey-dialog.actions.passkey' | translate:{ platformName: passkeySupport?.platformName ?? ("passkey-title" | translate) } }}
         <mat-icon fontSet="material-icons-round" matSuffix>key</mat-icon>

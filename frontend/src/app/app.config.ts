@@ -7,6 +7,8 @@ import { getBaseHrefPath } from './services/config.service'
 import { provideTranslateService } from '@ngx-translate/core'
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader'
 import { OVERLAY_DEFAULT_CONFIG, type OverlayDefaultConfig } from '@angular/cdk/overlay'
+import { MatPaginatorIntl } from '@angular/material/paginator'
+import { CustomPaginatorIntl } from './paginator-intl'
 
 const baseHrefInterceptor: HttpInterceptorFn = (req, next) => {
   // Skip external URLs
@@ -45,5 +47,6 @@ export const appConfig: ApplicationConfig = {
       }),
     }),
     { provide: OVERLAY_DEFAULT_CONFIG, useValue: overlayDefaultConfig },
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 }

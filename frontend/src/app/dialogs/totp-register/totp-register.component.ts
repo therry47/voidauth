@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service'
 import { SpinnerService } from '../../services/spinner.service'
 import { SnackbarService } from '../../services/snackbar.service'
 import { HttpErrorResponse } from '@angular/common/http'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-totp-register',
@@ -25,6 +25,7 @@ export class TotpRegisterComponent implements OnInit {
   private spinnerService = inject(SpinnerService)
   private snackbarService = inject(SnackbarService)
   private authService = inject(AuthService)
+  private translateService = inject(TranslateService)
 
   async ngOnInit(): Promise<void> {
     this.spinnerService.show()
@@ -35,7 +36,7 @@ export class TotpRegisterComponent implements OnInit {
       this.uri.set(totpOptions.uri)
     } catch (e) {
       console.error(e)
-      this.snackbarService.error('Could not get authenticator info.')
+      this.snackbarService.error(String(this.translateService.instant('totp-register.messages.could-not-get-info')))
       this.dialogRef.close(false)
     } finally {
       this.spinnerService.hide()
@@ -52,9 +53,10 @@ export class TotpRegisterComponent implements OnInit {
     } catch (e) {
       console.error(e)
       if (e instanceof HttpErrorResponse && e.status === 401) {
-        this.snackbarService.error('Invalid code entered.')
+        this.snackbarService.error(String(this.translateService.instant('totp-register.messages.invalid-code')))
       } else {
-        this.snackbarService.error(this.data?.enableMfa ? 'Could not enable Multi-Factor Authentication.' : 'Could not add authenticator.')
+        const mfaKey = this.data?.enableMfa ? 'totp-register.messages.could-not-enable-mfa' : 'totp-register.messages.could-not-add'
+        this.snackbarService.error(String(this.translateService.instant(mfaKey)))
       }
     } finally {
       this.spinnerService.hide()

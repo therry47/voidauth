@@ -12,7 +12,7 @@ import { SpinnerService } from '../../services/spinner.service'
 import { PasskeyService, type PasskeySupport } from '../../services/passkey.service'
 import { WebAuthnAbortService } from '@simplewebauthn/browser'
 import { TextDividerComponent } from '../../components/text-divider/text-divider.component'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { AsyncPipe } from '@angular/common'
 
 @Component({
@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   private cd = inject(ChangeDetectorRef)
+  private translate = inject(TranslateService)
 
   private passwordField = viewChild<ElementRef>('passwordField')
 
@@ -96,7 +97,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           // attempted to create interaction and failed
           console.error('Interaction cookie session not set even after creating one.')
           console.error(e)
-          this.snackbarService.error('Could not create session.')
+          this.snackbarService.error(String(this.translate.instant('login.messages.could-not-create-session')))
           this.interactionAvailable = false
         }
       }
@@ -155,9 +156,13 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         const status = e.status
 
         if (status === 401) {
-          shownError = 'Invalid username or password.'
+          shownError = String(
+            this.translate.instant('login.messages.invalid-credentials'),
+          )
         } else if (status === 404) {
-          shownError = 'User not found.'
+          shownError = String(
+            this.translate.instant('login.messages.user-not-found'),
+          )
         }
 
         shownError ??= e.error?.message
@@ -166,7 +171,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       console.error(e)
-      shownError ??= 'Something went wrong.'
+      shownError ??= String(this.translate.instant('login.messages.something-went-wrong'))
       this.snackbarService.error(shownError)
     } finally {
       this.spinnerService.hide()
@@ -182,7 +187,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } catch (error) {
       if (!auto) {
-        this.snackbarService.error('Could not login with passkey.')
+        this.snackbarService.error(String(this.translate.instant('login.messages.could-not-login-passkey')))
       }
       console.error(error)
     }
