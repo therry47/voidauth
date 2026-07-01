@@ -165,12 +165,37 @@
     }
   },
   "verify-email": {
+    "verify": {
+      "title": {
+        "verifying-email": "Verifying Email...",
+        "email-could-not-be-verified": "Email Could Not Be Verified",
+        "sending-new-verification": "Sending New Verification...",
+        "email-verification-could-not-be-sent": "Email Verification Could Not Be Sent"
+      },
+      "actions": {
+        "send-again": "Send Again"
+      }
+    },
+    "verify-sent": {
+      "title": {
+        "verification-email-sent": "Verification Email Sent",
+        "email-verification-required": "Email Verification Required"
+      },
+      "actions": {
+        "logout": "Logout",
+        "send-again": "Send Again",
+        "send-verification": "Send Verification"
+      },
+      "email": {
+        "label": "Email"
+      }
+    },
     "messages": {
-      "could-not-load-user": "Could not load user details.",
+      "could-not-load-user": "Error loading user details.",
       "verification-sent": "Verification email sent.",
       "email-updated": "Email updated.",
       "could-not-update-email": "Could not update email.",
-      "resent": "Verification Email Re-Sent.",
+      "resent": "Verification email resent.",
       "could-not-create-session": "Could not create session."
     }
   },

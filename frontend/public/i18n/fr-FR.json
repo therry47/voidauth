@@ -165,13 +165,38 @@
     }
   },
   "verify-email": {
+    "verify": {
+      "title": {
+        "verifying-email": "Vérification de l'e-mail...",
+        "email-could-not-be-verified": "Impossible de vérifier l'e-mail",
+        "sending-new-verification": "Envoi d'un nouveau mail de vérification...",
+        "email-verification-could-not-be-sent": "Impossible d'envoyer l'e-mail de vérification"
+      },
+      "actions": {
+        "send-again": "Renvoyer"
+      }
+    },
+    "verify-sent": {
+      "title": {
+        "verification-email-sent": "E-mail de vérification envoyé",
+        "email-verification-required": "Vérification d'e-mail requise"
+      },
+      "actions": {
+        "logout": "Se déconnecter",
+        "send-again": "Renvoyer",
+        "send-verification": "Envoyer la vérification"
+      },
+      "email": {
+        "label": "E-mail"
+      }
+    },
     "messages": {
       "could-not-load-user": "Impossible de charger les détails de l'utilisateur.",
       "verification-sent": "E-mail de vérification envoyé.",
       "email-updated": "E-mail mis à jour.",
       "could-not-update-email": "Impossible de mettre à jour l'e-mail.",
       "resent": "E-mail de vérification renvoyé.",
-      "could-not-create-session": "Impossible de créer une session."
+      "could-not-create-session": "Impossible de créer la session."
     }
   },
   "settings": {

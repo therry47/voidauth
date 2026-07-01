@@ -134,5 +134,7 @@ dist
 /voidauth
 /config
 /db
+/voidauth-data
+/compose.test.yml
 *.sqlite
 /dev
