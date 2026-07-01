@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           // attempted to create interaction and failed
           console.error('Interaction cookie session not set even after creating one.')
           console.error(e)
-          this.snackbarService.error(String(this.translate.instant('pages.login.messages.could-not-create-session')))
+          this.snackbarService.error(String(this.translate.instant('login.messages.could-not-create-session')))
           this.interactionAvailable = false
         }
       }
@@ -157,11 +157,11 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (status === 401) {
           shownError = String(
-            this.translate.instant('pages.login.messages.invalid-credentials'),
+            this.translate.instant('login.messages.invalid-credentials'),
           )
         } else if (status === 404) {
           shownError = String(
-            this.translate.instant('pages.login.messages.user-not-found'),
+            this.translate.instant('login.messages.user-not-found'),
           )
         }
 
@@ -171,7 +171,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       console.error(e)
-      shownError ??= String(this.translate.instant('pages.login.messages.something-went-wrong'))
+      shownError ??= String(this.translate.instant('login.messages.something-went-wrong'))
       this.snackbarService.error(shownError)
     } finally {
       this.spinnerService.hide()
@@ -187,7 +187,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } catch (error) {
       if (!auto) {
-        this.snackbarService.error(String(this.translate.instant('pages.login.messages.could-not-login-passkey')))
+        this.snackbarService.error(String(this.translate.instant('login.messages.could-not-login-passkey')))
       }
       console.error(error)
     }
