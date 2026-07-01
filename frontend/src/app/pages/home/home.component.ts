@@ -100,14 +100,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       columnDef: 'lastUsed',
       header: 'settings.sections.security.passkeys.columns.last-used',
       cell: element => element.lastUsed
-        ? new Date(element.lastUsed).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        ? new Date(element.lastUsed).toLocaleDateString(
+            this.translateService.getCurrentLang(),
+            { year: 'numeric', month: 'short', day: 'numeric' },
+          )
         : '-',
     },
     {
       columnDef: 'createdAt',
       header: 'settings.sections.security.passkeys.columns.created-at',
       cell: element => element.createdAt
-        ? new Date(element.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        ? new Date(element.createdAt).toLocaleDateString(
+            this.translateService.getCurrentLang(),
+            { year: 'numeric', month: 'short', day: 'numeric' },
+          )
         : '-',
     },
   ]
