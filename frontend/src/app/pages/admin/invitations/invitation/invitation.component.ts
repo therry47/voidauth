@@ -192,7 +192,13 @@ export class InvitationComponent {
       }
 
       await this.adminService.sendInvitation(this.id)
-      this.snackbarService.message(String(this.translateService.instant('admin.invitation.messages.sent', { email: String(this.inviteEmail) })))
+      this.snackbarService.message(
+        String(
+          this.translateService.instant('admin.invitation.messages.sent', {
+            email: String(this.inviteEmail),
+          }),
+        ),
+      )
     } catch (e) {
       console.error(e)
       this.snackbarService.error(String(this.translateService.instant('admin.invitation.messages.could-not-send')))

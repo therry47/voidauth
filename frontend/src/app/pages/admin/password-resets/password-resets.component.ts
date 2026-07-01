@@ -151,7 +151,13 @@ export class PasswordResetsComponent {
       }
       this.spinnerService.show()
       await this.adminService.sendPasswordReset(reset.id)
-      this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.sent-email', { email: reset.email })))
+      this.snackbarService.message(
+        String(
+          this.translateService.instant('admin.password-resets.messages.sent-email', {
+            email: reset.email,
+          }),
+        ),
+      )
     } catch (_e) {
       this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-send')))
     } finally {
