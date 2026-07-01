@@ -15,7 +15,10 @@
     "title": "Login",
     "messages": {
       "could-not-login-passkey": "Could not login with passkey.",
-      "could-not-create-session": "Could not create session."
+      "could-not-create-session": "Could not create session.",
+      "invalid-credentials": "Invalid username or password.",
+      "user-not-found": "User not found.",
+      "something-went-wrong": "Something went wrong."
     }
   },
   "contact-us": {

@@ -156,9 +156,13 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         const status = e.status
 
         if (status === 401) {
-          shownError = 'Invalid username or password.'
+          shownError = String(
+            this.translate.instant('pages.login.messages.invalid-credentials'),
+          )
         } else if (status === 404) {
-          shownError = 'User not found.'
+          shownError = String(
+            this.translate.instant('pages.login.messages.user-not-found'),
+          )
         }
 
         shownError ??= e.error?.message
@@ -167,7 +171,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       console.error(e)
-      shownError ??= 'Something went wrong.'
+      shownError ??= String(this.translate.instant('pages.login.messages.something-went-wrong'))
       this.snackbarService.error(shownError)
     } finally {
       this.spinnerService.hide()

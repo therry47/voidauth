@@ -15,7 +15,10 @@
     "title": "Connexion",
     "messages": {
       "could-not-login-passkey": "Impossible de se connecter avec la clé d'authentification.",
-      "could-not-create-session": "Impossible de créer la session."
+      "could-not-create-session": "Impossible de créer la session.",
+      "invalid-credentials": "Nom d'utilisateur ou mot de passe invalide.",
+      "user-not-found": "Utilisateur introuvable.",
+      "something-went-wrong": "Une erreur est survenue."
     }
   },
   "contact-us": {
