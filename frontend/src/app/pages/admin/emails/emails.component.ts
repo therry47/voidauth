@@ -108,7 +108,7 @@ export class EmailsComponent {
     const testEmailDialog = this.dialog.open<EmailInputComponent, { message?: string, header?: string, initial?: string }>(
       EmailInputComponent, {
         data: {
-          header: 'Send Test Email',
+          header: String(this.translateService.instant('admin.emails.dialogs.send-test-header')),
           initial: this.me?.email,
         },
         disableClose: true,

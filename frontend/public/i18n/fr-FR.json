@@ -57,7 +57,16 @@
       "register-passkey": "Enregistrer une clé d'authentification",
       "back": "Retour"
     },
-    "title": "Double authentification requise"
+    "title": "Double authentification requise",
+    "messages": {
+      "could-not-get-options": "Impossible d'obtenir les options de l'application d'authentification.",
+      "passkey-mfa-info": "Seules les clés d'authentification nécessitant une double authentification satisfont les exigences de 2FA par elles-mêmes.",
+      "invalid-code": "Code saisi invalide.",
+      "could-not-auth-passkey": "Impossible de s'authentifier avec la clé d'authentification.",
+      "passkey-already-registered": "Clé d'authentification déjà enregistrée.",
+      "could-not-register-passkey": "Impossible d'enregistrer la clé d'authentification.",
+      "something-went-wrong-logout": "Une erreur est survenue. Essayez de vous déconnecter depuis le menu déroulant."
+    }
   },
   "registration": {
     "actions": {
@@ -77,6 +86,11 @@
     },
     "name": {
       "label": "Nom"
+    },
+    "messages": {
+      "invalid-invite": "Lien d'invitation invalide.",
+      "passkey-already-registered": "Clé d'authentification déjà enregistrée.",
+      "could-not-register-passkey": "Impossible d'enregistrer la clé d'authentification."
     }
   },
   "reset-password": {
@@ -370,7 +384,10 @@
         "confirm-approve": "Êtes-vous sûr de vouloir approuver {{count}} utilisateur(s) ?",
         "confirm-delete-bulk": "Êtes-vous sûr de vouloir supprimer {{count}} utilisateur(s) ?",
         "could-not-delete": "Impossible de supprimer le(s) utilisateur(s).",
-        "could-not-approve": "Impossible d'approuver le(s) utilisateur(s)."
+        "could-not-approve": "Impossible d'approuver le(s) utilisateur(s).",
+        "deleted": "L'utilisateur a été supprimé.",
+        "approved": "Le(s) utilisateur(s) ont été approuvé(s).",
+        "deleted-bulk": "Le(s) utilisateur(s) ont été supprimé(s)."
       }
     },
     "user": {
@@ -390,6 +407,16 @@
       "tooltips": {
         "remove": "Retirer",
         "open": "Ouvrir"
+      },
+      "messages": {
+        "error-loading": "Impossible de charger l'utilisateur.",
+        "updated": "Utilisateur mis à jour.",
+        "could-not-update": "Impossible de mettre à jour l'utilisateur.",
+        "signed-out": "Utilisateur déconnecté.",
+        "could-not-sign-out": "Impossible de déconnecter l'utilisateur.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "deleted": "Utilisateur supprimé.",
+        "could-not-delete": "Impossible de supprimer l'utilisateur."
       }
     },
     "clients": {
@@ -501,7 +528,10 @@
         "could-not-create": "Impossible de créer le lien de réinitialisation.",
         "confirm-delete": "Êtes-vous sûr de vouloir supprimer ce lien de réinitialisation ?",
         "could-not-delete": "Impossible de supprimer le lien de réinitialisation.",
-        "could-not-send": "Impossible d'envoyer le lien de réinitialisation."
+        "could-not-send": "Impossible d'envoyer le lien de réinitialisation.",
+        "created": "Le lien de réinitialisation du mot de passe a été créé.",
+        "deleted": "Le lien de réinitialisation a été supprimé.",
+        "sent-email": "Le lien de réinitialisation a été envoyé à {{email}}."
       }
     },
     "emails": {
@@ -517,6 +547,9 @@
         "could-not-load": "Impossible de récupérer les e-mails envoyés.",
         "sent-test": "E-mail de test envoyé.",
         "could-not-send-test": "Impossible d'envoyer l'e-mail de test."
+      },
+      "dialogs": {
+        "send-test-header": "Envoyer un e-mail de test"
       }
     },
     "groups": {
@@ -526,7 +559,8 @@
       },
       "messages": {
         "confirm-delete": "Êtes-vous sûr de vouloir supprimer le groupe « {{name}} » ?",
-        "could-not-delete": "Impossible de supprimer le groupe."
+        "could-not-delete": "Impossible de supprimer le groupe.",
+        "deleted": "Le groupe a été supprimé."
       }
     },
     "group": {
@@ -539,6 +573,16 @@
       "checkboxes": {
         "mfa-required": "2FA requise",
         "auto-assign": "Attribution automatique"
+      },
+      "messages": {
+        "error-loading": "Impossible de charger le groupe.",
+        "updated": "Groupe mis à jour.",
+        "created": "Groupe créé.",
+        "could-not-update": "Impossible de mettre à jour le groupe.",
+        "could-not-create": "Impossible de créer le groupe.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer ce groupe ?",
+        "deleted": "Groupe supprimé.",
+        "could-not-delete": "Impossible de supprimer le groupe."
       }
     },
     "invitations": {
@@ -548,7 +592,8 @@
       },
       "messages": {
         "confirm-delete": "Êtes-vous sûr de vouloir supprimer l'invitation pour « {{name}} » ?",
-        "could-not-delete": "Impossible de supprimer l'invitation."
+        "could-not-delete": "Impossible de supprimer l'invitation.",
+        "deleted": "L'invitation a été supprimée."
       }
     },
     "invitation": {
@@ -571,7 +616,17 @@
       "messages": {
         "link-copied": "Lien d'invitation copié dans le presse-papiers.",
         "email-not-verified": "Impossible d'envoyer le lien d'invitation par e-mail, la connexion e-mail n'est pas vérifiée.",
-        "no-email": "Impossible d'envoyer le lien d'invitation par e-mail, l'invitation ne contient pas d'adresse e-mail."
+        "no-email": "Impossible d'envoyer le lien d'invitation par e-mail, l'invitation ne contient pas d'adresse e-mail.",
+        "error-loading": "Impossible de charger l'invitation.",
+        "sent": "Invitation envoyée à {{email}}.",
+        "could-not-send": "Impossible d'envoyer l'invitation.",
+        "updated": "Invitation mise à jour.",
+        "created": "Invitation créée.",
+        "could-not-update": "Impossible de mettre à jour l'invitation.",
+        "could-not-create": "Impossible de créer l'invitation.",
+        "confirm-delete": "Êtes-vous sûr de vouloir supprimer cette invitation ?",
+        "deleted": "Invitation supprimée.",
+        "could-not-delete": "Impossible de supprimer l'invitation."
       },
       "actions": {
         "send": "Envoyer l'invitation"
@@ -719,6 +774,25 @@
       "invalid-code": "Code saisi invalide.",
       "could-not-enable-mfa": "Impossible d'activer la double authentification.",
       "could-not-add": "Impossible d'ajouter la méthode d'authentification."
+    }
+  },
+  "common": {
+    "messages": {
+      "something-went-wrong": "Une erreur est survenue."
+    }
+  },
+  "services": {
+    "passkey": {
+      "messages": {
+        "added": "Clé d'authentification ajoutée.",
+        "already-exists": "Cette clé d'authentification existe déjà.",
+        "could-not-create": "Impossible de créer la clé d'authentification."
+      }
+    },
+    "translation": {
+      "messages": {
+        "could-not-set": "Impossible de changer la langue."
+      }
     }
   }
 }

@@ -143,7 +143,7 @@ export class UsersComponent {
         this.spinnerService.show()
         await this.adminService.deleteUser(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('User was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.deleted')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-delete')))
       } finally {
@@ -185,7 +185,7 @@ export class UsersComponent {
 
         this.toggleSelectEnabled()
 
-        this.snackbarService.message('User(s) were approved.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.approved')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-approve')))
       } finally {
@@ -215,7 +215,7 @@ export class UsersComponent {
 
         this.toggleSelectEnabled()
 
-        this.snackbarService.message('User(s) were deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.users.messages.deleted-bulk')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.users.messages.could-not-delete')))
       } finally {

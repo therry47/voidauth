@@ -92,7 +92,7 @@ export class InvitationsComponent {
         this.spinnerService.show()
         await this.adminService.deleteInvitation(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Invitation was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.invitations.messages.deleted')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.invitations.messages.could-not-delete')))
       } finally {

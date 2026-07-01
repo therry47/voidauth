@@ -156,7 +156,7 @@ export class PasskeyService {
             resolve()
           })
         } else {
-          this.snackbarService.message('Passkey added.')
+          this.snackbarService.message(String(this.translateService.instant('services.passkey.messages.added')))
           resolve()
         }
       })
@@ -185,12 +185,12 @@ export class PasskeyService {
         this.spinnerService.show()
 
         this.register().then(() => {
-          this.snackbarService.message('Passkey added.')
+          this.snackbarService.message(String(this.translateService.instant('services.passkey.messages.added')))
         }).catch((error: unknown) => {
           if (error instanceof WebAuthnError && error.name === 'InvalidStateError') {
-            this.snackbarService.error('Passkey already exists.')
+            this.snackbarService.error(String(this.translateService.instant('services.passkey.messages.already-exists')))
           } else {
-            this.snackbarService.error('Could not create Passkey.')
+            this.snackbarService.error(String(this.translateService.instant('services.passkey.messages.could-not-create')))
           }
         }).finally(() => {
           this.spinnerService.hide()

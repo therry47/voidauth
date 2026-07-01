@@ -78,7 +78,7 @@ export class GroupsComponent {
         this.spinnerService.show()
         await this.adminService.deleteGroup(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Group was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.groups.messages.deleted')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.groups.messages.could-not-delete')))
       } finally {

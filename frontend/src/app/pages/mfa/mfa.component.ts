@@ -14,7 +14,7 @@ import type { CurrentUserDetails } from '@shared/api-response/UserDetails'
 import { UserService } from '../../services/user.service'
 import { WebAuthnError } from '@simplewebauthn/browser'
 import { Router } from '@angular/router'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { loginFactors } from '@shared/user'
 
 @Component({
@@ -38,6 +38,7 @@ export class MfaComponent implements OnInit {
   private authService = inject(AuthService)
   private userService = inject(UserService)
   private router = inject(Router)
+  private translateService = inject(TranslateService)
 
   async ngOnInit() {
     this.spinnerService.show()
@@ -60,13 +61,13 @@ export class MfaComponent implements OnInit {
           this.uri.set(uri)
         } catch (e) {
           console.error(e)
-          this.snackbarService.error('Could not get authenticator options.')
+          this.snackbarService.error(String(this.translateService.instant('mfa.messages.could-not-get-options')))
         }
       }
 
       // if user has 1 factor and amr includes webauth, notify that only verified passkeys will satisfy mfa
       if (this.user && loginFactors(this.user.amr) < 2 && this.user.amr.includes('webauthn')) {
-        this.snackbarService.message('Only Passkeys that require MFA will satisfy MFA requirements by themselves.')
+        this.snackbarService.message(String(this.translateService.instant('mfa.messages.passkey-mfa-info')))
       }
     } finally {
       this.spinnerService.hide()
@@ -98,9 +99,9 @@ export class MfaComponent implements OnInit {
     } catch (e) {
       console.error(e)
       if (e instanceof HttpErrorResponse && e.status === 401) {
-        this.snackbarService.error('Invalid code entered.')
+        this.snackbarService.error(String(this.translateService.instant('mfa.messages.invalid-code')))
       } else {
-        this.snackbarService.error('Something went wrong.')
+        this.snackbarService.error(String(this.translateService.instant('common.messages.something-went-wrong')))
       }
     } finally {
       this.spinnerService.hide()
@@ -118,7 +119,7 @@ export class MfaComponent implements OnInit {
         window.location.assign(redirect.location)
       }
     } catch (error) {
-      this.snackbarService.error('Could not authenticate with passkey.')
+      this.snackbarService.error(String(this.translateService.instant('mfa.messages.could-not-auth-passkey')))
       console.error(error)
     } finally {
       this.spinnerService.hide()
@@ -136,9 +137,9 @@ export class MfaComponent implements OnInit {
       }
     } catch (error) {
       if (error instanceof WebAuthnError && error.name === 'InvalidStateError') {
-        this.snackbarService.error('Passkey already registered.')
+        this.snackbarService.error(String(this.translateService.instant('mfa.messages.passkey-already-registered')))
       } else {
-        this.snackbarService.error('Could not register Passkey.')
+        this.snackbarService.error(String(this.translateService.instant('mfa.messages.could-not-register-passkey')))
       }
       console.error(error)
     } finally {
@@ -166,7 +167,7 @@ export class MfaComponent implements OnInit {
       }
     } catch (e) {
       console.error(e)
-      this.snackbarService.error('Something went wrong. Try logout from dropdown menu in header.')
+      this.snackbarService.error(String(this.translateService.instant('mfa.messages.something-went-wrong-logout')))
     } finally {
       this.spinnerService.hide()
       this.disabled.set(false)

@@ -94,7 +94,7 @@ export class PasswordResetsComponent {
       const reset = await this.adminService.createPasswordReset({ userId: user.id })
       const data = [reset].concat(this.dataSource.data)
       this.dataSource.data = this.dataSource.sortData(data, this.sort())
-      this.snackbarService.message('Password reset link was created.')
+      this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.created')))
     } catch (_e) {
       this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-create')))
     } finally {
@@ -119,7 +119,7 @@ export class PasswordResetsComponent {
         this.spinnerService.show()
         await this.adminService.deletePasswordReset(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Password reset link was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.deleted')))
       } catch (_e) {
         this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-delete')))
       } finally {
@@ -151,7 +151,7 @@ export class PasswordResetsComponent {
       }
       this.spinnerService.show()
       await this.adminService.sendPasswordReset(reset.id)
-      this.snackbarService.message(`Password reset link sent to ${reset.email}.`)
+      this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.sent-email', { email: reset.email })))
     } catch (_e) {
       this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-send')))
     } finally {
