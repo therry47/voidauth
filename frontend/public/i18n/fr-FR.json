@@ -697,7 +697,14 @@
     "totp-input": {
       "title": "Cela activera la double authentification sur votre compte.",
       "labels": {
-        "show-secret": "Afficher le secret"
+        "show-secret": "Afficher le secret",
+        "secret": "Secret :"
+      },
+      "messages": {
+        "copied-secret": "Secret copié dans le presse-papiers."
+      },
+      "tooltips": {
+        "copy-secret": "Copier le secret dans le presse-papiers."
       },
       "text": {
         "qrcode-instruction": "Scannez le QR code ou saisissez le secret dans votre application d'authentification",

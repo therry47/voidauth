@@ -1,4 +1,4 @@
-import { Component, inject, viewChild } from '@angular/core'
+import { Component, inject, viewChild, ChangeDetectionStrategy } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
@@ -16,12 +16,9 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-invitations',
-  imports: [
-    MaterialModule,
-    RouterLink,
-    TranslatePipe,
-  ],
+  imports: [MaterialModule, RouterLink, TranslatePipe],
   templateUrl: './invitations.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './invitations.component.scss',
 })
 export class InvitationsComponent {
@@ -73,7 +70,7 @@ export class InvitationsComponent {
     }
   }
 
-  delete(id: string) {
+  onDelete(id: string) {
     const invite = this.dataSource.data.find(i => i.id === id)
     const name = invite?.username ?? invite?.email ?? id
     const dialogRef = this.dialog.open(ConfirmComponent, {

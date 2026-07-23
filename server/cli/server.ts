@@ -37,6 +37,7 @@ export async function serve() {
   provider.proxy = true
 
   app.use(helmet({
+    crossOriginOpenerPolicy: false,
     contentSecurityPolicy: {
       // use safe defaults, and also...
       useDefaults: true,
@@ -97,13 +98,11 @@ export async function serve() {
       logger({
         level: 'debug',
         message: 'API Request Started',
-        details: {
-          request: {
-            ip: req.ip,
-            method: req.method,
-            // show only original path without query to avoid logging sensitive info
-            path: req.baseUrl + req.path,
-          },
+        request: {
+          ip: req.ip,
+          method: req.method,
+          // show only original path without query to avoid logging sensitive info
+          path: req.baseUrl + req.path,
         },
       })
       res.on('finish', async () => {
@@ -112,11 +111,9 @@ export async function serve() {
           logger({
             level: 'debug',
             message: 'API Response Sent',
-            details: {
-              response: {
-                statusCode: res.statusCode,
-                location: res.getHeader('Location') ? String(res.getHeader('Location')) : undefined,
-              },
+            response: {
+              statusCode: res.statusCode,
+              location: res.getHeader('Location') ? String(res.getHeader('Location')) : undefined,
             },
           })
 
@@ -320,7 +317,7 @@ export async function serve() {
 
   // interval to delete expired db entries and keep keys up to date
   let previousJwks = initialJwks
-  async function doMaintenance() {
+  async function doMaintenance(initialRun: boolean = false) {
     await als.run({}, async () => {
       await transaction()
       try {
@@ -328,14 +325,16 @@ export async function serve() {
         await clearAllExpiredEntries()
 
         // Update encrypted table values to the current STORAGE_KEY
-        await updateEncryptedTables()
+        await updateEncryptedTables(initialRun)
 
         // make DB keys all valid
         await makeKeysValid()
 
         // ensure that initial user is properly setup
         // Create initial admin user and group
-        await createInitialAdmin()
+        if (initialRun) {
+          await createInitialAdmin()
+        }
 
         // update provider cookie keys
         const cookieKeys = (await getCookieKeys()).map(k => k.value)
@@ -386,7 +385,7 @@ export async function serve() {
     })
   }
 
-  await doMaintenance()
+  await doMaintenance(true)
   setInterval(async () => {
     // Do initial key setup and cleanup
     await doMaintenance()
