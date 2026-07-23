@@ -353,7 +353,9 @@
         "create": "Créer",
         "view": "Voir",
         "open": "Ouvrir",
-        "remove": "Retirer"
+        "remove": "Retirer",
+        "updated": "mis à jour",
+        "created": "créé"
       },
       "labels": {
         "mfa-required": "2FA requise",

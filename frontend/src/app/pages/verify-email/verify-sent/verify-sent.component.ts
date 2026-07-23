@@ -128,7 +128,7 @@ export class VerifySentComponent implements OnInit {
         error ??= (e as Error).message
       }
 
-      error ??= 'Something went wrong.'
+      error ??= String(this.translateService.instant('common.messages.something-went-wrong'))
       this.snackbarService.error(error)
     } finally {
       this.spinnerService.hide()

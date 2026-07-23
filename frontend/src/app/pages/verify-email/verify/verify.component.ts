@@ -95,7 +95,7 @@ export class VerifyComponent implements OnInit {
         error ||= (e as Error).message
       }
 
-      error ||= 'Something went wrong.'
+      error ||= String(this.translateService.instant('common.messages.something-went-wrong'))
       this.snackbarService.error(error)
       this.title = this.translateService.stream('verify-email.verify.title.email-could-not-be-verified')
     } finally {
@@ -121,7 +121,7 @@ export class VerifyComponent implements OnInit {
         error ||= (e as Error).message
       }
 
-      error ||= 'Something went wrong.'
+      error ||= String(this.translateService.instant('common.messages.something-went-wrong'))
       this.title = this.translateService.stream('verify-email.verify.title.email-verification-could-not-be-sent')
       this.snackbarService.error(error)
     } finally {

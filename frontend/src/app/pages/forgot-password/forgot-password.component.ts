@@ -8,7 +8,7 @@ import { SnackbarService } from '../../services/snackbar.service'
 import { HttpErrorResponse } from '@angular/common/http'
 import { SpinnerService } from '../../services/spinner.service'
 import type { ConfigResponse } from '@shared/api-response/ConfigResponse'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { AsyncPipe } from '@angular/common'
 
 @Component({
@@ -36,6 +36,7 @@ export class ForgotPasswordComponent implements OnInit {
   authService = inject(AuthService)
   snackbarService = inject(SnackbarService)
   spinnerService = inject(SpinnerService)
+  private translateService = inject(TranslateService)
 
   async ngOnInit() {
     this.config = await this.configService.getConfig()
@@ -69,7 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
 
       console.error(e)
-      shownError ??= 'Something went wrong.'
+      shownError ??= String(this.translateService.instant('common.messages.something-went-wrong'))
       this.snackbarService.error(shownError)
     } finally {
       this.spinnerService.hide()

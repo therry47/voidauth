@@ -96,10 +96,11 @@ function humanDurationUnit(ms: number): Omit<DurationResult, 'past'> {
 
 export function humanDuration(ms: number): string {
   const parts = humanDurationParts(ms)
-  const key = `common.duration.${parts.unit}${parts.count > 1 ? 's' : ''}`
-  const str = parts.unit === 'now'
-    ? 'now'
-    : `${parts.count} ${key}`
+  if (parts.unit === 'now') {
+    return 'now'
+  }
+  const unitName = parts.unit + (parts.count > 1 ? 's' : '')
+  const str = `${parts.count} ${unitName}`
   if (parts.past) {
     return `${str} ago`
   }

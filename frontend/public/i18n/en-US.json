@@ -353,7 +353,9 @@
         "create": "Create",
         "view": "View",
         "open": "Open",
-        "remove": "Remove"
+        "remove": "Remove",
+        "updated": "updated",
+        "created": "created"
       },
       "labels": {
         "mfa-required": "MFA Required",

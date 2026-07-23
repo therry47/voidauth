@@ -273,7 +273,8 @@ export class UpsertClientComponent implements OnInit {
         await this.adminService.addClient(submitValues)
       }
 
-      const msg = String(this.translateService.instant('admin.client.messages.saved', { action: this.client_id ? 'updated' : 'created' }))
+      const actionKey = this.client_id ? 'admin.common.actions.updated' : 'admin.common.actions.created'
+      const msg = String(this.translateService.instant('admin.client.messages.saved', { action: this.translateService.instant(actionKey) }))
       this.snackbarService.message(msg)
       this.client_id = submitValues.client_id
       if (!this.client_id) {

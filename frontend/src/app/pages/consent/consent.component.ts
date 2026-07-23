@@ -66,7 +66,7 @@ export class ConsentComponent implements OnInit {
         shownError ??= (e as Error).message
       }
 
-      shownError ??= 'Something went wrong.'
+      shownError ??= String(this.translateService.instant('common.messages.something-went-wrong'))
       this.snackbarService.error(shownError)
     } finally {
       this.spinnerService.hide()

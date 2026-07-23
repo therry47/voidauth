@@ -136,7 +136,8 @@ export class DomainComponent {
 
       this.spinnerService.show()
       const response = await this.adminService.upsertProxyAuth({ ...values, domain, id: this.id ?? undefined })
-      const msg = String(this.translateService.instant('admin.domain.messages.saved', { action: this.id ? 'updated' : 'created' }))
+      const actionKey = this.id ? 'admin.common.actions.updated' : 'admin.common.actions.created'
+      const msg = String(this.translateService.instant('admin.domain.messages.saved', { action: this.translateService.instant(actionKey) }))
       this.snackbarService.message(msg)
 
       this.id = response.id
