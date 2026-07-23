@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       header: 'settings.sections.security.passkeys.columns.last-used',
       cell: element => element.lastUsed
         ? new Date(element.lastUsed).toLocaleDateString(
-            this.translateService.getCurrentLang(),
+            this.translateService.getCurrentLang() ?? undefined,
             { year: 'numeric', month: 'short', day: 'numeric' },
           )
         : '-',
@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       header: 'settings.sections.security.passkeys.columns.created-at',
       cell: element => element.createdAt
         ? new Date(element.createdAt).toLocaleDateString(
-            this.translateService.getCurrentLang(),
+            this.translateService.getCurrentLang() ?? undefined,
             { year: 'numeric', month: 'short', day: 'numeric' },
           )
         : '-',

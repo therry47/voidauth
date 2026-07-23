@@ -816,6 +816,24 @@
   "common": {
     "messages": {
       "something-went-wrong": "Something went wrong."
+    },
+    "duration": {
+      "now": "now",
+      "ago": "{{time}} ago",
+      "year": "{{count}} year",
+      "years": "{{count}} years",
+      "month": "{{count}} month",
+      "months": "{{count}} months",
+      "week": "{{count}} week",
+      "weeks": "{{count}} weeks",
+      "day": "{{count}} day",
+      "days": "{{count}} days",
+      "hour": "{{count}} hour",
+      "hours": "{{count}} hours",
+      "minute": "{{count}} minute",
+      "minutes": "{{count}} minutes",
+      "second": "{{count}} second",
+      "seconds": "{{count}} seconds"
     }
   },
   "services": {

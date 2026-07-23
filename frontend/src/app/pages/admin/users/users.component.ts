@@ -16,7 +16,7 @@ import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
 import { FormControl, ReactiveFormsModule } from '@angular/forms'
 import { debounceTime, distinctUntilChanged } from 'rxjs'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
-import { humanDuration } from '@shared/utils'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-users',
@@ -26,6 +26,8 @@ import { humanDuration } from '@shared/utils'
   styleUrl: './users.component.scss',
 })
 export class UsersComponent {
+  private translationService = inject(TranslationService)
+
   public me?: CurrentUserDetails
 
   dataSource: MatTableDataSource<UserWithAdminIndicator> = new MatTableDataSource()
@@ -59,7 +61,7 @@ export class UsersComponent {
     {
       columnDef: 'expiresAt',
       header: 'admin.common.columns.expires',
-      cell: element => element.expiresAt ? humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()) : '-',
+      cell: element => element.expiresAt ? this.translationService.humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()) : '-',
     },
   ]
 

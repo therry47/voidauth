@@ -15,9 +15,9 @@ import type { ConfigResponse } from '@shared/api-response/ConfigResponse'
 import { ConfigService } from '../../../services/config.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
-import { humanDuration } from '@shared/utils'
 import { AsyncPipe } from '@angular/common'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-password-sets',
@@ -27,6 +27,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
   styleUrl: './password-resets.component.scss',
 })
 export class PasswordResetsComponent {
+  private translationService = inject(TranslationService)
+
   dataSource: MatTableDataSource<PasswordResetUser> = new MatTableDataSource()
 
   readonly paginator = viewChild.required(MatPaginator)
@@ -41,7 +43,7 @@ export class PasswordResetsComponent {
     {
       columnDef: 'expiresAt',
       header: 'admin.common.columns.expires-in',
-      cell: element => humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
+      cell: element => this.translationService.humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
     },
   ]
 

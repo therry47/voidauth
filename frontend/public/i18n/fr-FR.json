@@ -816,6 +816,24 @@
   "common": {
     "messages": {
       "something-went-wrong": "Une erreur est survenue."
+    },
+    "duration": {
+      "now": "maintenant",
+      "ago": "il y a {{time}}",
+      "year": "{{count}} an",
+      "years": "{{count}} ans",
+      "month": "{{count}} mois",
+      "months": "{{count}} mois",
+      "week": "{{count}} semaine",
+      "weeks": "{{count}} semaines",
+      "day": "{{count}} jour",
+      "days": "{{count}} jours",
+      "hour": "{{count}} heure",
+      "hours": "{{count}} heures",
+      "minute": "{{count}} minute",
+      "minutes": "{{count}} minutes",
+      "second": "{{count}} seconde",
+      "seconds": "{{count}} secondes"
     }
   },
   "services": {

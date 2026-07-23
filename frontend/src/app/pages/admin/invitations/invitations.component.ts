@@ -11,8 +11,8 @@ import type { Invitation } from '@shared/db/Invitation'
 import { SpinnerService } from '../../../services/spinner.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
-import { humanDuration } from '@shared/utils'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-invitations',
@@ -22,6 +22,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
   styleUrl: './invitations.component.scss',
 })
 export class InvitationsComponent {
+  private translationService = inject(TranslationService)
+
   dataSource: MatTableDataSource<Invitation> = new MatTableDataSource()
 
   readonly paginator = viewChild.required(MatPaginator)
@@ -41,12 +43,12 @@ export class InvitationsComponent {
     {
       columnDef: 'expiresAt',
       header: 'admin.common.columns.expires-in',
-      cell: element => humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
+      cell: element => this.translationService.humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
     },
     {
       columnDef: 'userExpiresAt',
       header: 'admin.common.columns.access-expires',
-      cell: element => element.userExpiresAt ? humanDuration(new Date(element.userExpiresAt).getTime() - new Date().getTime()) : '-',
+      cell: element => element.userExpiresAt ? this.translationService.humanDuration(new Date(element.userExpiresAt).getTime() - new Date().getTime()) : '-',
     },
   ]
 
