@@ -393,6 +393,9 @@
         "remove": "Remove",
         "danger": "DANGER",
         "approval": "Approval"
+      },
+      "placeholders": {
+        "pick-one": "Pick one"
       }
     },
     "users": {
@@ -751,6 +754,9 @@
         "save": {
           "label": "Save"
         }
+      },
+      "placeholders": {
+        "name": "Passkey Name"
       }
     },
     "confirm": {

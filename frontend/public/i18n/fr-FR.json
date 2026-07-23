@@ -393,6 +393,9 @@
         "remove": "Retirer",
         "danger": "DANGER",
         "approval": "Approbation"
+      },
+      "placeholders": {
+        "pick-one": "Choisir"
       }
     },
     "users": {
@@ -751,6 +754,9 @@
         "save": {
           "label": "Enregistrer"
         }
+      },
+      "placeholders": {
+        "name": "Nom de la clé"
       }
     },
     "confirm": {

@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <p>{{ "components.passkey-edit.message.default" | translate }}</p>
   <mat-form-field style="width: 100%">
-    <input matInput type="text" [formControl]="displayNameControl" placeholder="Passkey Name" />
+    <input matInput type="text" [formControl]="displayNameControl" placeholder="{{ 'components.passkey-edit.placeholders.name' | translate }}" />
     @if (displayNameControl.errors) {
       <mat-error>{{ displayNameControl.errors | validationError }}</mat-error>
     }
