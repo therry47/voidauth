@@ -697,7 +697,6 @@
     "totp-input": {
       "title": "Cela activera la double authentification sur votre compte.",
       "labels": {
-        "show-secret": "Afficher le secret",
         "secret": "Secret :"
       },
       "messages": {
