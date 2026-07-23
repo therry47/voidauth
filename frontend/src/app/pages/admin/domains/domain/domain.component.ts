@@ -146,8 +146,9 @@ export class DomainComponent {
         replaceUrl: true,
       })
     } catch (_e) {
+      const errActionKey = this.id ? 'admin.common.actions.update' : 'admin.common.actions.create'
       const errMsg = String(this.translateService.instant(
-        'admin.domain.messages.could-not-save', { action: this.id ? 'update' : 'create' },
+        'admin.domain.messages.could-not-save', { action: this.translateService.instant(errActionKey) },
       ))
       this.snackbarService.error(errMsg)
     } finally {
