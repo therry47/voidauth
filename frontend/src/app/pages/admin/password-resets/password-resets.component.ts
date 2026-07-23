@@ -15,9 +15,9 @@ import type { ConfigResponse } from '@shared/api-response/ConfigResponse'
 import { ConfigService } from '../../../services/config.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
-import { humanDuration } from '@shared/utils'
 import { AsyncPipe } from '@angular/common'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-password-sets',
@@ -27,6 +27,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
   styleUrl: './password-resets.component.scss',
 })
 export class PasswordResetsComponent {
+  private translationService = inject(TranslationService)
+
   dataSource: MatTableDataSource<PasswordResetUser> = new MatTableDataSource()
 
   readonly paginator = viewChild.required(MatPaginator)
@@ -35,13 +37,13 @@ export class PasswordResetsComponent {
   columns: TableColumn<PasswordResetUser>[] = [
     {
       columnDef: 'username',
-      header: 'Username',
+      header: 'admin.common.columns.username',
       cell: element => element.username,
     },
     {
       columnDef: 'expiresAt',
-      header: 'Expires In',
-      cell: element => humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
+      header: 'admin.common.columns.expires-in',
+      cell: element => this.translationService.humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
     },
   ]
 
@@ -96,9 +98,9 @@ export class PasswordResetsComponent {
       const reset = await this.adminService.createPasswordReset({ userId: user.id })
       const data = [reset].concat(this.dataSource.data)
       this.dataSource.data = this.dataSource.sortData(data, this.sort())
-      this.snackbarService.message('Password reset link was created.')
+      this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.created')))
     } catch (_e) {
-      this.snackbarService.error('Could not create password reset link.')
+      this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-create')))
     } finally {
       this.spinnerService.hide()
     }
@@ -107,8 +109,8 @@ export class PasswordResetsComponent {
   onDelete(id: string) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete this password reset link?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.password-resets.messages.confirm-delete')),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -121,9 +123,9 @@ export class PasswordResetsComponent {
         this.spinnerService.show()
         await this.adminService.deletePasswordReset(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Password reset link was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.password-resets.messages.deleted')))
       } catch (_e) {
-        this.snackbarService.error('Could not delete password reset link.')
+        this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }
@@ -157,9 +159,15 @@ export class PasswordResetsComponent {
       }
       this.spinnerService.show()
       await this.adminService.sendPasswordReset(reset.id)
-      this.snackbarService.message(`Password reset link sent to ${reset.email}.`)
+      this.snackbarService.message(
+        String(
+          this.translateService.instant('admin.password-resets.messages.sent-email', {
+            email: reset.email,
+          }),
+        ),
+      )
     } catch (_e) {
-      this.snackbarService.error('Could not send password reset link.')
+      this.snackbarService.error(String(this.translateService.instant('admin.password-resets.messages.could-not-send')))
     } finally {
       this.spinnerService.hide()
     }

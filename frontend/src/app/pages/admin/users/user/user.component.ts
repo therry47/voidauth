@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../../dialogs/confirm/confirm.component'
 import type { ItemIn, Nullable } from '@shared/utils'
 import { isValidEmail } from '../../../../validators/validators'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-user',
@@ -59,6 +59,7 @@ export class UserComponent implements OnInit {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   ngOnInit() {
     this.route.paramMap.subscribe(async (params) => {
@@ -90,7 +91,7 @@ export class UserComponent implements OnInit {
         this.groupAutoFilter()
       } catch (e) {
         console.error(e)
-        this.snackbarService.error('Error loading user.')
+        this.snackbarService.error(String(this.translateService.instant('admin.user.messages.error-loading')))
       } finally {
         this.spinnerService.hide()
       }
@@ -149,9 +150,9 @@ export class UserComponent implements OnInit {
       this.spinnerService.show()
 
       await this.adminService.updateUser({ ...values, username, id: this.id })
-      this.snackbarService.message('User updated.')
+      this.snackbarService.message(String(this.translateService.instant('admin.user.messages.updated')))
     } catch (_e) {
-      this.snackbarService.error('Could not update user.')
+      this.snackbarService.error(String(this.translateService.instant('admin.user.messages.could-not-update')))
     } finally {
       this.spinnerService.hide()
     }
@@ -164,9 +165,9 @@ export class UserComponent implements OnInit {
         await this.adminService.signOutUser(this.id)
       }
 
-      this.snackbarService.message('User signed out.')
+      this.snackbarService.message(String(this.translateService.instant('admin.user.messages.signed-out')))
     } catch (_e) {
-      this.snackbarService.error('Could not sign out user.')
+      this.snackbarService.error(String(this.translateService.instant('admin.user.messages.could-not-sign-out')))
     } finally {
       this.spinnerService.hide()
     }
@@ -175,8 +176,8 @@ export class UserComponent implements OnInit {
   remove() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete this user?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.user.messages.confirm-delete')),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -191,10 +192,10 @@ export class UserComponent implements OnInit {
           await this.adminService.deleteUser(this.id)
         }
 
-        this.snackbarService.message('User deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.user.messages.deleted')))
         await this.router.navigate(['/admin/users'])
       } catch (_e) {
-        this.snackbarService.error('Could not delete user.')
+        this.snackbarService.error(String(this.translateService.instant('admin.user.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

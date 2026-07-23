@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router'
 import { SpinnerService } from '../../../services/spinner.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-groups',
@@ -30,7 +30,7 @@ export class GroupsComponent {
   columns: TableColumn<Group>[] = [
     {
       columnDef: 'name',
-      header: 'Group Name',
+      header: 'admin.common.columns.group-name',
       cell: element => element.name,
     },
   ]
@@ -43,6 +43,7 @@ export class GroupsComponent {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   async ngAfterViewInit() {
     try {
@@ -60,8 +61,8 @@ export class GroupsComponent {
     const group = this.dataSource.data.find(g => g.id === id)
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to remove group '${group?.name ?? id}'?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.groups.messages.confirm-delete', { name: group?.name ?? id })),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -74,9 +75,9 @@ export class GroupsComponent {
         this.spinnerService.show()
         await this.adminService.deleteGroup(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Group was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.groups.messages.deleted')))
       } catch (_e) {
-        this.snackbarService.error('Could not delete group.')
+        this.snackbarService.error(String(this.translateService.instant('admin.groups.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

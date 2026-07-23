@@ -15,7 +15,7 @@ import { ADMIN_GROUP } from '@shared/constants'
 import { SpinnerService } from '../../../../services/spinner.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../../dialogs/confirm/confirm.component'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import type { Nullable } from '@shared/utils'
 
 @Component({
@@ -49,6 +49,7 @@ export class GroupComponent {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   ngOnInit() {
     this.route.paramMap.subscribe(async (params) => {
@@ -79,7 +80,7 @@ export class GroupComponent {
         }
       } catch (e) {
         console.error(e)
-        this.snackbarService.error('Error loading group.')
+        this.snackbarService.error(String(this.translateService.instant('admin.group.messages.error-loading')))
       } finally {
         this.spinnerService.hide()
       }
@@ -137,14 +138,16 @@ export class GroupComponent {
 
       this.spinnerService.show()
       const group = await this.adminService.upsertGroup({ ...values, name, id: this.id ?? undefined })
-      this.snackbarService.message(`Group ${this.id ? 'updated' : 'created'}.`)
+      const msgKey = this.id ? 'admin.group.messages.updated' : 'admin.group.messages.created'
+      this.snackbarService.message(String(this.translateService.instant(msgKey)))
 
       this.id = group.id
       await this.router.navigate(['/admin/group', this.id], {
         replaceUrl: true,
       })
     } catch (_e) {
-      this.snackbarService.error(`Could not ${this.id ? 'update' : 'create'} group.`)
+      const errKey = this.id ? 'admin.group.messages.could-not-update' : 'admin.group.messages.could-not-create'
+      this.snackbarService.error(String(this.translateService.instant(errKey)))
     } finally {
       this.spinnerService.hide()
     }
@@ -153,8 +156,8 @@ export class GroupComponent {
   remove() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to delete this group?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.group.messages.confirm-delete')),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -169,10 +172,10 @@ export class GroupComponent {
           await this.adminService.deleteGroup(this.id)
         }
 
-        this.snackbarService.message('Group deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.group.messages.deleted')))
         await this.router.navigate(['/admin/groups'])
       } catch (_e) {
-        this.snackbarService.error('Could not delete group.')
+        this.snackbarService.error(String(this.translateService.instant('admin.group.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

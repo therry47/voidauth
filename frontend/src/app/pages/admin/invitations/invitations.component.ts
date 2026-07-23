@@ -11,8 +11,8 @@ import type { Invitation } from '@shared/db/Invitation'
 import { SpinnerService } from '../../../services/spinner.service'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmComponent } from '../../../dialogs/confirm/confirm.component'
-import { humanDuration } from '@shared/utils'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-invitations',
@@ -22,6 +22,8 @@ import { TranslatePipe } from '@ngx-translate/core'
   styleUrl: './invitations.component.scss',
 })
 export class InvitationsComponent {
+  private translationService = inject(TranslationService)
+
   dataSource: MatTableDataSource<Invitation> = new MatTableDataSource()
 
   readonly paginator = viewChild.required(MatPaginator)
@@ -30,23 +32,23 @@ export class InvitationsComponent {
   columns: TableColumn<Invitation>[] = [
     {
       columnDef: 'username',
-      header: 'Username',
+      header: 'admin.common.columns.username',
       cell: element => element.username ?? '-',
     },
     {
       columnDef: 'email',
-      header: 'Email',
+      header: 'admin.common.columns.email',
       cell: element => element.email ?? '-',
     },
     {
       columnDef: 'expiresAt',
-      header: 'Expires In',
-      cell: element => humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
+      header: 'admin.common.columns.expires-in',
+      cell: element => this.translationService.humanDuration(new Date(element.expiresAt).getTime() - new Date().getTime()),
     },
     {
       columnDef: 'userExpiresAt',
-      header: 'Access Expires',
-      cell: element => (element.userExpiresAt ? humanDuration(new Date(element.userExpiresAt).getTime() - new Date().getTime()) : '-'),
+      header: 'admin.common.columns.access-expires',
+      cell: element => element.userExpiresAt ? this.translationService.humanDuration(new Date(element.userExpiresAt).getTime() - new Date().getTime()) : '-',
     },
   ]
 
@@ -56,6 +58,7 @@ export class InvitationsComponent {
   private snackbarService = inject(SnackbarService)
   private spinnerService = inject(SpinnerService)
   private dialog = inject(MatDialog)
+  private translateService = inject(TranslateService)
 
   async ngAfterViewInit() {
     // Assign the data to the data source for the table to render
@@ -71,10 +74,11 @@ export class InvitationsComponent {
 
   onDelete(id: string) {
     const invite = this.dataSource.data.find(i => i.id === id)
+    const name = invite?.username ?? invite?.email ?? id
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        message: `Are you sure you want to remove invitation for '${invite?.username ?? invite?.email ?? id}'?`,
-        header: 'Delete',
+        message: String(this.translateService.instant('admin.invitations.messages.confirm-delete', { name })),
+        header: String(this.translateService.instant('admin.common.dialogs.delete')),
       },
     })
 
@@ -87,9 +91,9 @@ export class InvitationsComponent {
         this.spinnerService.show()
         await this.adminService.deleteInvitation(id)
         this.dataSource.data = this.dataSource.data.filter(g => g.id !== id)
-        this.snackbarService.message('Invitation was deleted.')
+        this.snackbarService.message(String(this.translateService.instant('admin.invitations.messages.deleted')))
       } catch (_e) {
-        this.snackbarService.error('Could not delete invitation.')
+        this.snackbarService.error(String(this.translateService.instant('admin.invitations.messages.could-not-delete')))
       } finally {
         this.spinnerService.hide()
       }

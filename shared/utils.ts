@@ -32,17 +32,23 @@ export type SchemaInfer<T extends zod.ZodRawShape> = zod.infer<zod.ZodObject<T>>
 
 export type SchemaInferInput<T extends zod.ZodRawShape> = zod.input<zod.ZodObject<T>>
 
-export function humanDuration(ms: number): string {
-  const negative = ms < 0
-  ms = Math.abs(ms)
-  const result = humanDurationHelper(ms)
-  if (!result) {
-    return 'now'
-  }
-  return negative ? `${result} ago` : result
+export type DurationResult = {
+  unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'now'
+  count: number
+  past: boolean
 }
 
-function humanDurationHelper(ms: number): string | null {
+export function humanDurationParts(ms: number): DurationResult {
+  const negative = ms < 0
+  ms = Math.abs(ms)
+  const unit = humanDurationUnit(ms)
+  return {
+    ...unit,
+    past: negative,
+  }
+}
+
+function humanDurationUnit(ms: number): Omit<DurationResult, 'past'> {
   const MINUTE = 60
   const HOUR = MINUTE * 60
   const DAY = HOUR * 24
@@ -59,31 +65,44 @@ function humanDurationHelper(ms: number): string | null {
   const minutes = Math.round(seconds / MINUTE)
 
   if (months > 11) {
-    return String(years) + ' year' + ((years > 1) ? 's' : '')
+    return { unit: 'year', count: years }
   }
 
   if (weeks > 4) {
-    return String(months) + ' month' + ((months > 1) ? 's' : '')
+    return { unit: 'month', count: months }
   }
 
   if (days > 6) {
-    return String(weeks) + ' week' + ((weeks > 1) ? 's' : '')
+    return { unit: 'week', count: weeks }
   }
 
   if (hours > 23) {
-    return String(days) + ' day' + ((days > 1) ? 's' : '')
+    return { unit: 'day', count: days }
   }
 
   if (minutes > 59) {
-    return String(hours) + ' hour' + ((hours > 1) ? 's' : '')
+    return { unit: 'hour', count: hours }
   }
 
   if (seconds > 59) {
-    return String(minutes) + ' minute' + ((minutes > 1) ? 's' : '')
+    return { unit: 'minute', count: minutes }
   }
 
   if (ms > 999) {
-    return String(seconds) + ' second' + ((seconds > 1) ? 's' : '')
+    return { unit: 'second', count: seconds }
   }
-  return null
+  return { unit: 'now', count: 0 }
+}
+
+export function humanDuration(ms: number): string {
+  const parts = humanDurationParts(ms)
+  if (parts.unit === 'now') {
+    return 'now'
+  }
+  const unitName = parts.unit + (parts.count > 1 ? 's' : '')
+  const str = `${parts.count} ${unitName}`
+  if (parts.past) {
+    return `${str} ago`
+  }
+  return str
 }

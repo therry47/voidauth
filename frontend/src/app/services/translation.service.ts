@@ -4,6 +4,7 @@ import locales from '../../../public/locales.json'
 import { firstValueFrom } from 'rxjs'
 import { SpinnerService } from './spinner.service'
 import { SnackbarService } from './snackbar.service'
+import { humanDurationParts } from '@shared/utils'
 
 export type LangInfo = {
   code: string
@@ -60,7 +61,7 @@ export class TranslationService {
       }).catch((e: unknown) => {
         console.error(e)
         if (!autoSet) {
-          this.snackbarService.error('Cannot set language.')
+          this.snackbarService.error(String(this.translate.instant('services.translation.messages.could-not-set')))
         }
         resolve(false)
       }).finally(() => {
@@ -123,5 +124,18 @@ export class TranslationService {
 
   private setLocalStorageLang(lang: string) {
     localStorage.setItem('voidauth-selected-lang', lang)
+  }
+
+  public humanDuration(ms: number): string {
+    const parts = humanDurationParts(ms)
+    if (parts.unit === 'now') {
+      return String(this.translate.instant('common.duration.now'))
+    }
+    const key = `common.duration.${parts.unit}${parts.count > 1 ? 's' : ''}`
+    const timeStr = String(this.translate.instant(key, { count: parts.count }))
+    if (parts.past) {
+      return String(this.translate.instant('common.duration.ago', { time: timeStr }))
+    }
+    return timeStr
   }
 }
