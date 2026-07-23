@@ -18,6 +18,7 @@ import type { CurrentUserDetails } from '@shared/api-response/UserDetails'
 import type { ConfigResponse } from '@shared/api-response/ConfigResponse'
 import { ConfigService } from '../../../services/config.service'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { TranslationService } from '../../../services/translation.service'
 
 @Component({
   selector: 'app-emails',
@@ -27,6 +28,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
   styleUrl: './emails.component.scss',
 })
 export class EmailsComponent {
+  private translationService = inject(TranslationService)
+
   dataSource: MatTableDataSource<EmailLog> = new MatTableDataSource()
 
   readonly paginator = viewChild.required(MatPaginator)
@@ -36,7 +39,10 @@ export class EmailsComponent {
     {
       columnDef: 'createdAt',
       header: 'admin.common.columns.sent',
-      cell: element => new Date(element.createdAt).toDateString(),
+      cell: element => new Date(element.createdAt).toLocaleDateString(
+        this.translationService.currentLang()?.code ?? undefined,
+        { year: 'numeric', month: 'short', day: 'numeric' },
+      ),
     },
     {
       columnDef: 'to',
